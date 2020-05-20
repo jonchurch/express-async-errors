@@ -119,7 +119,8 @@ describe('express-async-errors', () => {
       .describe({ hasDescription: true });
     app.use('/', router);
 
-    const appRouteStack = app._router.stack;
+    // Express v4.x uses app._router, v5 uses app.router
+    const appRouteStack = (app._router && app._router.stack) || app.router.stack;
     const someMiddlewareFunctionStack = appRouteStack[appRouteStack.length - 1];
     const innerStack = someMiddlewareFunctionStack.handle.stack;
     const routeData = innerStack[0].route.swaggerData;

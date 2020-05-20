@@ -1,9 +1,13 @@
 /* eslint-disable global-require,no-inner-declarations */
 const { version: expressVersion } = require('express/package.json');
 
+console.log({ expressVersion });
+console.log(require.resolve('express'));
+
 if (expressVersion[0] > 4) {
   // eslint-disable-next-line no-console
-  console.log(`DEPRECATED: Package express-async-errors works with version 4.x.x of Express, you are using ${expressVersion} which supports async route handlers natively`);
+  console.log('DEPRECATED: Package express-async-errors works with version 4.x.x of Express' +
+    `, you are using ${expressVersion} which supports async route handlers natively. You can safely uninstall this package`);
 } else {
   const Layer = require('express/lib/router/layer');
   const Router = require('express/lib/router');
